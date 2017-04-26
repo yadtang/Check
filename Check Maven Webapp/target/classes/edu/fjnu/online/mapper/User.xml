@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fjnu.online.mapper.UserMapper">
+
+	<!-- 数据库表映射 -->
+	<resultMap id="userRM" type="edu.fjnu.online.domain.User">
+		<id property="userId" column="userid"/>
+		<result property="userName" column="username"/>
+		<result property="userPwd" column="userpwd"/>
+		<result property="grade" column="grade"/>
+		<result property="userType" column="usertype"/>
+		<result property="userState" column="userstate"/>
+		<result property="email" column="email"/>
+		<result property="telephone" column="telephone"/>
+		<result property="address" column="address"/>
+		<result property="remark" column="remark"/>
+	</resultMap>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="edu.fjnu.online.domain.User">
+		insert into t_user
+		(userid,username,userpwd,grade,usertype,userstate,email,telephone,address,remark)
+		values
+		(#{userId},#{userName},#{userPwd},#{grade},#{userType},'0',#{email},#{telephone},#{address},#{remark})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="edu.fjnu.online.domain.User">
+		update t_user
+		<set>
+			<if test="userName!=null">
+				username=#{userName},
+			</if>
+			<if test="userPwd!=null">
+				userpwd=#{userPwd},
+			</if>
+			<if test="userType!=null">
+				usertype=#{userType},
+			</if>
+			<if test="userState!=null">
+				userstate=#{userState},
+			</if>
+			<if test="email!=null">
+				email=#{email},
+			</if>
+			<if test="telephone!=null">
+				telephone=#{telephone},
+			</if>
+			<if test="address!=null">
+				address=#{address},
+			</if>
+			<if test="remark!=null">
+				remark=#{remark},
+			</if>
+		</set>
+			where userid=#{userId}
+	</update>
+	
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="string" resultMap="userRM">
+		select * from t_user
+		where 1=1
+		order by userstate
+	</select>
+	
+	<!-- 查询所有待审核记录 -->
+	<select id="findPending" parameterType="string" resultMap="userRM">
+		select * from t_user
+		where userstate=0
+	</select>
+	
+	<!-- 查询一个录 -->
+	<select id="get" parameterType="edu.fjnu.online.domain.User" resultMap="userRM">
+		select * from t_user
+		where userid=#{id} 
+	</select>
+	
+	<!-- 删除一条记录 -->
+	<delete id="delete" parameterType="string">
+		delete from t_user
+		where userid=#{id}
+	</delete>
+	
+	<!-- 查询一个录 -->
+	<select id="getStu" parameterType="edu.fjnu.online.domain.User" resultMap="userRM">
+		select * from t_user
+		where userid=#{userId}
+		and userstate=1
+	</select>
+</mapper>

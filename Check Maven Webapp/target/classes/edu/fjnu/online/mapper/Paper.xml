@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fjnu.online.mapper.PaperMapper">
+
+	<!-- 数据库表映射 -->
+	<resultMap id="paperRM" type="edu.fjnu.online.domain.Paper">
+		<id property="paperId" column="paperid"/>
+		<result property="paperName" column="papername"/>
+		<result property="courseId" column="courseid"/>
+		<result property="gradeId" column="gradeid"/>
+		<result property="userId" column="userid"/>
+		<result property="questionId" column="questionid"/>
+		<result property="beginTime" column="begintime"/>
+		<result property="endTime" column="endtime"/>
+		<result property="allowTime" column="allowtime"/>
+		<result property="score" column="score"/>
+		<result property="paperState" column="paperstate"/>
+	</resultMap>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="edu.fjnu.online.domain.Paper">
+		insert into t_paper
+		(paperid,papername,courseid,gradeid,userid,questionid,begintime,endtime,allowtime,score,paperstate)
+		values
+		(#{paperId},#{paperName},#{courseId},#{gradeId},#{userId},#{questionId},#{beginTime},#{endTime},#{allowTime},#{score},#{paperState})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="edu.fjnu.online.domain.Paper">
+		update t_paper
+		<set>
+			<if test="paperName!=null">
+				papername=#{paperName},
+			</if>
+			<if test="gradeId!=null">
+				gradeid=#{gradeId},
+			</if>
+			<if test="courseId!=null">
+				courseid=#{courseId},
+			</if>
+			<if test="userId!=null">
+				userid=#{userId},
+			</if>
+			<if test="questionId!=null">
+				questionid=#{questionId},
+			</if>
+			<if test="beginTime!=null">
+				begintime=#{beginTime},
+			</if>
+			<if test="endTime!=null">
+				endtime=#{endTime},
+			</if>
+			<if test="allowTime!=null">
+				allowtime=#{allowTime},
+			</if>
+			<if test="score!=null">
+				score=#{score},
+			</if>
+			<if test="paperstate!=null">
+				paperstate=#{paperState},
+			</if>
+		</set>
+			where paperid=#{paperId}
+	</update>
+	
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="string" resultMap="paperRM">
+		select * from t_paper
+		where paperstate='0'
+	</select>
+	
+	<!-- 查询一个录 -->
+	<select id="get" parameterType="edu.fjnu.online.domain.Paper" resultMap="paperRM">
+		select * from t_paper
+		where paperid=#{id} 
+		and paperstate='0'
+	</select>
+	
+	<!-- 删除一条记录 -->
+	<delete id="delete" parameterType="string">
+		delete from t_paper
+		where paperid=#{id}
+	</delete>
+	
+	<!-- 查询学生已经考试过的试卷 -->
+	<select id="getUserPaperById" parameterType="edu.fjnu.online.domain.Paper" resultMap="paperRM">
+		select * from t_paper
+		where userid=#{id} 
+		and paperstate = '2'
+	</select>
+	<select id="getPaperDetail" parameterType="map" resultMap="paperRM">
+		select * from t_paper
+		where userid=#{userId}
+		and paperid=#{paperId}
+	</select>
+	
+	<update id="updateUserPaper" parameterType="map">
+		update t_paper
+		<set>
+			<if test="paperName!=null">
+				papername=#{paperName},
+			</if>
+			<if test="gradeId!=null">
+				gradeid=#{gradeId},
+			</if>
+			<if test="courseId!=null">
+				courseid=#{courseId},
+			</if>
+			<if test="questionId!=null">
+				questionid=#{questionId},
+			</if>
+			<if test="beginTime!=null">
+				begintime=#{beginTime},
+			</if>
+			<if test="endTime!=null">
+				endtime=#{endTime},
+			</if>
+			<if test="allowTime!=null">
+				allowtime=#{allowTime},
+			</if>
+			<if test="score!=null">
+				score=#{score},
+			</if>
+			<if test="paperState!=null">
+				paperstate=#{paperState},
+			</if>
+		</set>
+			where paperid=#{paperId}
+			and userid=#{userId}
+	</update>
+	
+	<!-- 查询未考试的试卷 -->
+	<select id="getUndoPaper" parameterType="map" resultMap="paperRM">
+		select * from t_paper where paperstate='0' 
+			and paperid not in(select paperid from t_paper where userid=#{userId})
+	</select>
+	
+	<!-- 查询未考试的试卷 -->
+	<select id="qryUndoPaper" parameterType="map" resultMap="paperRM">
+		select * from t_paper where paperstate = '1' and userid=#{userId}
+	</select>
+</mapper>

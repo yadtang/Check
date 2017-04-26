@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fjnu.online.mapper.FactoryMapper">
+
+	<!-- 数据库表映射 -->
+	<resultMap id="factoryRM" type="edu.fjnu.online.domain.Factory">
+		<id property="id" column="FACTORY_ID"/>
+		<result property="fullName" column="FULL_NAME"/>
+		<result property="factoryName" column="FACTORY_NAME"/>
+		<result property="contractor" column="CONTRACTOR"/>
+		<result property="phone" column="PHONE"/>
+		<result property="mobile" column="MOBILE"/>
+		<result property="fax" column="FAX"/>
+		<result property="cnote" column="CNOTE"/>
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="state" column="STATE"/>
+	</resultMap>
+	
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="edu.fjnu.online.domain.Factory" resultMap="factoryRM">
+		select * from factory_c
+		where 1=1
+	</select>
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fjnu.online.mapper.GradeMapper">
+
+	<!-- 数据库表映射 -->
+	<resultMap id="gradeRM" type="edu.fjnu.online.domain.Grade">
+		<id property="gradeId" column="gradeid"/>
+		<result property="gradeName" column="gradename"/>
+		<result property="courseId" column="courseid"/>
+	</resultMap>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="edu.fjnu.online.domain.Grade">
+		insert into t_grade
+		(gradename,courseid)
+		values
+		(#{gradeName},#{courseId})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="edu.fjnu.online.domain.Grade">
+		update t_grade
+		<set>
+			<if test="gradeName!=null">
+				gradename=#{gradeName},
+			</if>
+			<if test="courseId!=null">
+				courseid=#{courseId},
+			</if>
+		</set>
+			where gradeid=#{gradeId}
+	</update>
+	
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="int" resultMap="gradeRM">
+		select * from t_grade
+		where 1=1
+	</select>
+	
+	<!-- 查询一个录 -->
+	<select id="get" parameterType="edu.fjnu.online.domain.Grade" resultMap="gradeRM">
+		select * from t_grade
+		where gradeid=#{id} 
+	</select>
+	
+	<!-- 删除一条记录 -->
+	<delete id="delete" parameterType="int">
+		delete from t_grade
+		where gradeid=#{id}
+	</delete>
+</mapper>

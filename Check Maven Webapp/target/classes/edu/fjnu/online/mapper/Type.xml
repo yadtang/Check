@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fjnu.online.mapper.TypeMapper">
+
+	<!-- 数据库表映射 -->
+	<resultMap id="typeRM" type="edu.fjnu.online.domain.Type">
+		<id property="typeId" column="typeid"/>
+		<result property="typeName" column="typename"/>
+		<result property="score" column="score"/>
+		<result property="remark" column="remark"/>
+	</resultMap>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="edu.fjnu.online.domain.Type">
+		insert into t_type
+		(typename,score,remark)
+		values
+		(#{typeName},#{score},#{remark})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="edu.fjnu.online.domain.Type">
+		update t_type
+		<set>
+			<if test="typeName!=null">
+				typename=#{typeName},
+			</if>
+			<if test="score!=null">
+				score=#{score},
+			</if>
+			<if test="remark!=null">
+				remark=#{remark},
+			</if>
+		</set>
+			where typeid=#{typeId}
+	</update>
+	
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="int" resultMap="typeRM">
+		select * from t_type
+		where 1=1
+	</select>
+	
+	<!-- 查询一个录 -->
+	<select id="get" parameterType="edu.fjnu.online.domain.Type" resultMap="typeRM">
+		select * from t_type
+		where typeid=#{id} 
+	</select>
+	
+	<!-- 删除一条记录 -->
+	<delete id="delete" parameterType="int">
+		delete from t_type
+		where typeid=#{id}
+	</delete>
+</mapper>

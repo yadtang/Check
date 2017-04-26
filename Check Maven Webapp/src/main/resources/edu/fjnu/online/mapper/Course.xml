@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fjnu.online.mapper.CourseMapper">
+
+	<!-- 数据库表映射 -->
+	<resultMap id="courseRM" type="edu.fjnu.online.domain.Course">
+		<id property="courseId" column="courseid"/>
+		<result property="courseName" column="coursename"/>
+		<result property="courseState" column="coursestate"/>
+	</resultMap>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="edu.fjnu.online.domain.Course">
+		insert into t_course
+		(coursename,coursestate)
+		values
+		(#{courseName},#{courseState})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="edu.fjnu.online.domain.Course">
+		update t_course
+		<set>
+			<if test="courseName!=null">
+				coursename=#{courseName},
+			</if>
+			<if test="courseState!=null">
+				coursestate=#{courseState},
+			</if>
+		</set>
+			where courseid=#{courseId}
+	</update>
+	
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="int" resultMap="courseRM">
+		select * from t_course
+		where 1=1
+	</select>
+	
+	<!-- 查询一个录 -->
+	<select id="get" parameterType="edu.fjnu.online.domain.Course" resultMap="courseRM">
+		select * from t_course
+		where courseid=#{id} 
+	</select>
+	
+	<!-- 删除一条记录 -->
+	<delete id="delete" parameterType="int">
+		delete from t_course
+		where courseid=#{id}
+	</delete>
+</mapper>

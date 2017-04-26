@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fjnu.online.mapper.ErrorBookMapper">
+
+	<!-- 数据库表映射 -->
+	<resultMap id="errorRM" type="edu.fjnu.online.domain.ErrorBook">
+		<id property="bookId" column="bookid"/>
+		<result property="userId" column="userid"/>
+		<result property="courseId" column="courseid"/>
+		<result property="gradeId" column="gradeid"/>
+		<result property="typeId" column="typeid"/>
+		<result property="userAnswer" column="uanswer"/>
+		<association property="question" javaType="edu.fjnu.online.domain.Question">
+			<id property="questionId" column="questionid"/>
+			<result property="quesName" column="quesname"/>
+			<result property="optionA" column="optiona"/>
+			<result property="optionB" column="optionb"/>
+			<result property="optionC" column="optionc"/>
+			<result property="optionD" column="optiond"/>
+			<result property="answer" column="answer"/>
+			<result property="userAnswer" column="useranswer"/>
+			<result property="courseId" column="courseid"/>
+			<result property="typeId" column="typeid"/>
+			<result property="gradeId" column="gradeid"/>
+			<result property="difficulty" column="difficulty"/>
+			<result property="remark" column="remark"/>
+			<result property="answerDetail" column="answerdetail"/>
+		</association>
+	</resultMap>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="edu.fjnu.online.domain.ErrorBook">
+		insert into t_errorbook
+		(userid,courseid,gradeid,uanswer,questionid,typeid)
+		values
+		(#{userId},#{courseId},#{gradeId},#{userAnswer},#{question.questionId},#{question.typeId})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="edu.fjnu.online.domain.ErrorBook">
+		update t_errorbook
+		<set>
+			<if test="courseId!=null">
+				courseid=#{courseId},
+			</if>
+			<if test="gradeId!=null">
+				gradeid=#{gradeId},
+			</if>
+			<if test="userAnswer!=null">
+				uanswer=#{userAnswer},
+			</if>
+			<if test="questionId!=null">
+				questionid=#{questionId},
+			</if>
+		</set>
+			where bookid=#{bookId}
+	</update>
+	
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="int" resultMap="errorRM">
+		select * from t_errorbook
+		where 1=1
+	</select>
+	
+	<!-- 查询一个录 -->
+	<select id="get" parameterType="edu.fjnu.online.domain.ErrorBook" resultMap="errorRM">
+		select * from t_errorbook
+		where bookid=#{id} 
+	</select>
+	
+	<!-- 删除一条记录 -->
+	<delete id="delete" parameterType="int">
+		delete from t_errorbook
+		where bookid=#{id}
+	</delete>
+	
+	<!-- 
+		quesName,optiona,optionb,optionc,optiond,answer,useranswer,courseid,typeid,difficulty,remark,answerdetail,gradeid
+	 -->
+	<select id="getBookInfo"  resultMap="errorRM" parameterType="map">
+		select * from t_question a,t_errorbook b
+		where a.questionid = b.questionid
+		and b.userid=#{userId}
+	</select>
+</mapper>

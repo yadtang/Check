@@ -1,0 +1,83 @@
+body{ font-family:'微软雅黑';}
+.title{ line-height:33px; background:url(../images/righttitlebig.png) repeat-x; border:1px solid #c1d3de; overflow:visible;}
+.title h2{ margin-left:7px; padding-left:22px; font-weight:bold; font-size:14px; font-family:'宋体'; color:#000000; background:url(../images/titleico.png) no-repeat left center;}
+
+/*查询条件*/
+.query{ padding:11px 0 18px 0; border:1px solid #c1d3de; border-top:none; overflow:visible;}
+.query-conditions{ overflow:visible;}
+.query .conditions{ overflow:visible; float:left; line-height:30px; width:380px; margin:6px 63px 0 25px; }
+.query .conditions label{ float:left; width:72px; color:#000; }
+
+.select-title,input{height:28px;line-height:28px\0;*line-height:28px;}
+/*流程名称*/
+.query .name .select-wrap{ float:left; position:relative;}
+.query .name .select-wrap .select-title{width:223px;padding:0 10px; border:1px solid #c5d6e0; outline:none; background:url(../images/inputbg.png) repeat-x; cursor:pointer;}
+.query .name .select-wrap .select-title span{ float:left;}
+.query .name .select-wrap .select-title .icon{ float:right; margin-right:3px; width:9px; height:28px; background:url(../images/selectxl.png) no-repeat center center;} 
+.query .name .select-wrap ul{ z-index:2; display:none; background:#fff;position:absolute; left:0; top:30px;  width:243px;}
+.query .name .select-wrap ul li{padding-left:10px; line-height:28px; cursor:pointer;}
+.query .name .select-wrap ul li:hover{ background:url(../images/formbtnbg.png) repeat-x;}
+
+/*操作时间*/
+.query .operate-time .select-wrap{ float:left; position:relative;}
+.query .operate-time .select-wrap .select-title{width:100px; height:28px; padding:0 10px; border:1px solid #c5d6e0; outline:none; background:url(../images/inputbg.png) repeat-x; cursor:pointer;}
+.query .operate-time .select-wrap .select-title span{ float:left;}
+.query .operate-time .select-wrap .select-title .icon{ float:right; margin-right:0px; width:9px; height:28px; background:url(../images/selectxl.png) no-repeat center center;} 
+.query .operate-time .select-wrap ul{ display:none; background:#fff;position:absolute; left:0; top:30px;  width:120px;}
+.query .operate-time .select-wrap ul li{ padding-left:10px; line-height:28px; cursor:pointer;}
+.query .operate-time .select-wrap ul li:hover{ background:url(../images/formbtnbg.png) repeat-x;}
+.query .operate-time .input-box{ float:left; margin-left:5px;}
+.query .operate-time .input-box input{ float:left; width:44px;height:28px; padding:0 10px; border:1px solid #c5d6e0; outline:none; background:url(../images/inputbg.png) repeat-x;}
+.query .operate-time .input-box span{ float:left; margin-left:9px;}
+
+/*时间*/
+.query .time .time-select{ float:left; position:relative;}
+.query .time .time-select input{ padding:0 6px 0 8px; width:102px; height:28px; border:1px solid #c5d6e0; outline:none; background:url(../images/inputbg.png) repeat-x;}
+.query .time .time-select span{ float:left; color:#000;}
+.query .time .time-select .icon{ position:absolute; right:6px; top:1px; width:16px; height:28px; background:url(../images/dateico.png) no-repeat center center; cursor:pointer;}
+.query .time .line{ float:left; margin:0 2px;}
+
+/*人员*/
+.query .staff input{float:left; width:173px; padding: 0 10px;height:28px; border:1px solid #c5d6e0; outline:none; background:url(../images/inputbg.png) repeat-x;}
+.query .staff .staff-select{ float:left; margin-left:7px; width:43px; height:28px; border:1px solid #c5d6e0; background:url(../images/formbtnbg.png) repeat-x; text-align:center; color:#000;}
+
+/*查询按钮*/
+.query-btn{ margin:15px 0 0 97px;}
+.query-btn a{ display:block; float:left; line-height:33px; text-align:center; border-radius:2px;}
+.query-btn a.confirm{ width:88px;color:#fff; background:#6ab96e; font-size:14px;}
+.query-btn a.clear{ margin-left:7px; width:98px; border:1px solid #c1d3de; background:url(../images/righttitlebig.png) repeat-x; color:#000; font-size:14px;height:31px;line-height: 31px;}
+
+/*表格操作按钮*/
+.table-operate{ padding-left:15px; height:37px; line-height:37px; background:url(../images/toolbarbg.png) repeat-x; border:1px solid #c1d3de; border-top:none;}
+.table-operate a{ float:left; font-family:'宋体'; width:45px; text-align:right; color:#000; margin-right:20px;}
+.table-operate a.add{ background:url(../images/addico.png) no-repeat left 9px;}
+.table-operate a.del{ background:url(../images/delico.png) no-repeat left 9px;}
+.table-operate a.edit{ background:url(../images/edtico.png) no-repeat left 9px;}
+.table-operate a.count{ background:url(../images/tjico.png) no-repeat left 9px;}
+.table-operate a.check{ background:url(../images/bookico.png) no-repeat left 9px;}
+
+/*表格*/
+table{ width:100%;  border:1px solid #c1d3de; border-top:none;}
+thead tr th{ height:35px; line-height:35px; border-bottom:1px solid #c1d3de; background:url(../images/tablelistbg.png) repeat-x; font-weight:bold;}
+tbody tr td{ border-left:1px dotted #c7c7c7; line-height:30px;}
+tbody tr:first-child td{ padding-top:2px;}
+tbody tr td:first-child{ border-left:none;}
+table tr .num{ width:63px; text-align: center;}
+table tr .name{ width:118px; padding-left:17px;}
+table tr .process{ width:142px; padding-left:13px;}
+table tr .node{ width:162px; padding-left:13px;}
+table tr .time{ width:218px; padding-left:13px;}
+table tr .operate{ width:219px; padding-left:15px;}
+table tr .operate a{ color:#2c7bbc;}
+table tr .operate a:hover{ text-decoration:underline;}
+
+
+/*分页*/
+.pagination{ margin-top:10px;padding:0 10px;}
+.pagination .pxofy{float:left;color:#6c6c6c;}
+.pagination .pagin-list{float:right;}
+.pagination .goto{float:right;margin-left:10px;}
+.pagination .goto .text{padding:0;}
+.pagination .goto input[type=text]{float:left;width:25px;height:22px;border:1px solid #8EB2D2;outline:none; text-align:center;}
+
+

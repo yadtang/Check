@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fjnu.online.mapper.QuestionMapper">
+
+	<!-- 数据库表映射 -->
+	<resultMap id="questionRM" type="edu.fjnu.online.domain.Question">
+		<id property="questionId" column="questionid"/>
+		<result property="quesName" column="quesname"/>
+		<result property="optionA" column="optiona"/>
+		<result property="optionB" column="optionb"/>
+		<result property="optionC" column="optionc"/>
+		<result property="optionD" column="optiond"/>
+		<result property="answer" column="answer"/>
+		<result property="userAnswer" column="useranswer"/>
+		<result property="courseId" column="courseid"/>
+		<result property="typeId" column="typeid"/>
+		<result property="gradeId" column="gradeid"/>
+		<result property="difficulty" column="difficulty"/>
+		<result property="remark" column="remark"/>
+		<result property="answerDetail" column="answerdetail"/>
+	</resultMap>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="edu.fjnu.online.domain.Question">
+		insert into t_question
+		(quesName,optiona,optionb,optionc,optiond,answer,useranswer,courseid,typeid,difficulty,remark,answerdetail,gradeid)
+		values
+		(#{quesName},#{optionA},#{optionB},#{optionC},#{optionD},#{answer},#{userAnswer},#{courseId},#{typeId},#{difficulty},#{remark},#{answerDetail},#{gradeId})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="edu.fjnu.online.domain.Question">
+		update t_question
+		<set>
+			<if test="quesName!=null">
+				quesname=#{quesName},
+			</if>
+			<if test="optionA!=null">
+				optiona=#{optionA},
+			</if>
+			<if test="optionB!=null">
+				optionb=#{optionB},
+			</if>
+			<if test="optionC!=null">
+				optionc=#{optionC},
+			</if>
+			<if test="optionD!=null">
+				optiond=#{optionD},
+			</if>
+			<if test="answer!=null">
+				answer=#{answer},
+			</if>
+			<if test="userAnswer!=null">
+				useranswer=#{userAnswer},
+			</if>
+			<if test="typeId!=null">
+				typeid=#{typeId},
+			</if>
+			<if test="gradeId!=null">
+				gradeid=#{gradeId},
+			</if>
+			<if test="difficulty!=null">
+				difficulty=#{difficulty},
+			</if>
+			<if test="remark!=null">
+				remark=#{remark},
+			</if>
+			<if test="answerDetail!=null">
+				answerdetail=#{answerDetail},
+			</if>
+			<if test="courseId!=null">
+				courseid=#{courseId},
+			</if>
+		</set>
+			where questionid=#{questionId}
+	</update>
+	
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="string" resultMap="questionRM">
+		select * from t_question
+		where 1=1
+	</select>
+	
+	<!-- 查询一个录 -->
+	<select id="get" parameterType="edu.fjnu.online.domain.Question" resultMap="questionRM">
+		select * from t_question
+		where questionid=#{id} 
+	</select>
+	
+	<!-- 删除一条记录 -->
+	<delete id="delete" parameterType="string">
+		delete from t_question
+		where questionid=#{id}
+	</delete>
+	
+	<!-- 随机生成相应数量的题目 -->
+	<select id="createPaper" parameterType="map" resultMap="questionRM">
+		select * from t_question 
+			where gradeid=#{gradeId}
+			and typeid=#{typeId}
+			and courseid=#{courseId}
+			ORDER BY RAND() LIMIT #{num} 
+	</select>
+</mapper>
